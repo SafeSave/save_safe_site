@@ -23,7 +23,7 @@ SHIPPING_CHOICES = (
 class Order(models.Model):
     buyer = models.ForeignKey(Customer,on_delete= models.CASCADE, null = True)
     seller = models.ForeignKey(Customer, on_delete= models.CASCADE, null= True)
-    order_date = models.DateField(default = datetime.today())
+    order_date = models.DateField(default = datetime.date.today())
     payment_method = models.CharField(max_length= 255, choices= PAYMENT_CHOICES)
     shipping_method = models.CharField(max_length= 255, choices = SHIPPING_CHOICES)
 
@@ -36,7 +36,7 @@ def product_photo_path(instance, filename):
 
 YEAR_CHOICES = ()
 for r in range(1980, (datetime.datetime.now().year + 1)):
-    YEAR_CHOICES.append((r, r))
+    YEAR_CHOICES+=((r, r))
 
 NEW = 'new'
 USED = 'used'
@@ -46,7 +46,7 @@ CONDITION_CHOICES = (
 ) # more choices needed here
 
 class Product(models.Model):
-    seller = models.ForeignKey(Customer,on_delete=models.CASACADE, null =True)
+    seller = models.ForeignKey(Customer,on_delete=models.CASCADE, null =True)
     post_date = models.DateTimeField(auto_now_add=True)
     user_image = models.ImageField(upload_to = product_photo_path, null = True)
     official_image = models.ImageField(upload_to = product_photo_path, null = True)
@@ -55,7 +55,7 @@ class Product(models.Model):
     year_of_purchase = models.IntegerField(('year'), max_length=4, choices=YEAR_CHOICES, default=datetime.datetime.now().year)
     condition = models.CharField(max_length = 255, choices = CONDITION_CHOICES, default = NEW)
     location = models.CharField(max_length= 255, null = True) #location package needed to support map display
-    available_time = models.DateField(default = datetime.today())
+    available_time = models.DateField(default = datetime.date.today())
     inspection = models.BooleanField(default = True)
     category = models.CharField(max_length= 255, default = 'unkown') # category choices needed
 
@@ -64,7 +64,7 @@ class Product(models.Model):
 
 
 class Rating(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASACADE,null = True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE,null = True)
     rating = models.IntegerField(default = 0)
     comment = models.CharField(null = True)
 

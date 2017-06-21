@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'customer',
-    'helper'
+    'helper',
+    'location_field.apps.DefaultConfig'
 ]
 
 MIDDLEWARE = [
@@ -97,7 +98,7 @@ else:
             # create database named mediconnect when test on local machine
             'NAME': 'savesafe',
             # create user
-            'USER': 'savesafe',
+            'USER': 'root',
             'PASSWORD': 'password',
             'HOST': '127.0.0.1',
             'PORT': '3306',

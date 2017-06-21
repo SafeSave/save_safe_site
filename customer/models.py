@@ -19,7 +19,7 @@ YEAR_IN_SCHOOL_CHOICES = (
 )
 class Customer(models.Model):
     user = models.OneToOneField(User)
-    year = models.CharField(max_length = 2, choice = YEAR_IN_SCHOOL_CHOICES,default = FRESHMAN)
+    year = models.CharField(max_length = 2, choices = YEAR_IN_SCHOOL_CHOICES,default = FRESHMAN)
     major = models.CharField(max_length = 255, default = 'unkown')
     email = models.EmailField(default='unknown')
     venmo = models.TextField(default = 'unkown') #tempeorarily hold for payment method
@@ -30,7 +30,7 @@ class Customer(models.Model):
     is_buyer = models.BooleanField(default = True)
     is_seller = models.BooleanField(default = False)
     buyer_rating = models.DecimalField(default = 0.0)
-    seller_rating = models.DecimalField(deault = 0.0)
+    seller_rating = models.DecimalField(default = 0.0)
     photo = models.ImageField(upload_to = profile_photo_path, null = True)
 
     class Meta:
